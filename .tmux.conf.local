@@ -327,22 +327,31 @@ tmux_conf_copy_to_os_clipboard=false
 # this is the place to override or undo settings
 
 # increase history size
-#set -g history-limit 10000
+set -g history-limit 1000000
 
 # start with mouse mode enabled
 #set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
-#set -g status-keys vi
-#set -g mode-keys vi
+set -g status-keys vi
+set -g mode-keys vi
 
 # replace C-b by C-a instead of using both prefixes
-# set -gu prefix2
-# unbind C-a
-# unbind C-b
-# set -g prefix C-a
-# bind C-a send-prefix
+set -gu prefix2
+unbind C-a
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# Ring the bell if any background window rang a bell
+set -g bell-action any
+
+# Default termtype. If the rcfile sets $TERM, that overrides this value.
+#set -g default-terminal tmux-256color
+
+# Keep your finger on ctrl, or don't
+bind-key ^D detach-client
 
 # move status line to top
 #set -g status-position top
