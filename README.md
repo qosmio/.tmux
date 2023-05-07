@@ -17,9 +17,9 @@ Requirements:
 ⚠️ Before installing, you may want to backup your existing configuration.
 
 You can install Oh my tmux! at any of the following locations:
-- `~/.tmux.conf` and `~/.tmux.conf.local`
-- `$XDG_CONFIG_HOME/tmux/tmux.conf` and `$XDG_CONFIG_HOME/tmux/tmux.conf.local`
-- `~/.config/tmux/tmux.conf` and `~/.config/tmux/tmux.conf.local`
+- `~`
+- `$XDG_CONFIG_HOME/tmux`
+- `~/.config/tmux`
 
 Installing in `~`:
 ```
@@ -48,20 +48,20 @@ $ cp "/path/to/oh-my-tmux/.tmux.conf.local" "~/.config/tmux/tmux.conf.local"
 file names don't have a leading `.` character.
 
 ❗️ You should never alter the main `.tmux.conf` or `tmux.conf` file. If you do,
-you're on your own. Instead, every customization happens in your
-`.tmux.conf.local` or `tmux.conf.local` copy.
+you're on your own. Instead, every customization should happen in your
+`.tmux.conf.local` or `tmux.conf.local` customization file copy.
 
 If you're a Vim user, setting the `$EDITOR` environment variable to `vim` will
 enable and further customize the vi-style key bindings (see tmux manual).
 
-If you're new to tmux, I recommend you read [tmux 2: Productive Mouse-Free
+If you're new to tmux, I recommend you to read [tmux 2: Productive Mouse-Free
 Development][bhtmux2] by [@bphogan].
 
-Now proceed to [customize] your `.tmux.conf.local` or `tmux.conf.local` copy.
+Now proceed to [adjust] your `.local` customization file copy.
 
-[bhtmux2]: https://pragprog.com/book/bhtmux2/tmux-2
+[bhtmux2]: https://pragprog.com/titles/bhtmux2/tmux-2
 [@bphogan]: https://twitter.com/bphogan
-[customize]: #configuration
+[adjust]: #configuration
 
 Troubleshooting
 ---------------
@@ -85,7 +85,7 @@ Troubleshooting
    This can also happen on macOS when using iTerm2 and "Use Unicode version 9
    character widths" is enabled in `Preferences... > Profiles > Text`
 
-   For that reason, the default `.local` configuration file stopped using
+   For that reason, the default sample `.local` customization file stopped using
    Unicode characters for which width changed in between Unicode 8.0 and 9.0
    standards, as well as Emojis.
 
@@ -94,14 +94,14 @@ Troubleshooting
 
    First, you don't need to install Powerline. You only need fonts patched with
    Powerline symbols or the standalone `PowerlineSymbols.otf` font. Then make
-   sure your `.local` configuration file copy uses the Powerline code points for
+   sure your `.local` customization file copy uses the Powerline code points for
    `tmux_conf_theme_left_separator_XXX` values.
 
- - **I'm using Bash On Windows (WSL), colors and Powerline look are broken.**
+ - **I'm using Bash On Windows (WSL), colors and the Powerline look are broken.**
 
    There is currently a [bug][1681] in the new console powering Bash On Windows
    preventing text attributes (bold, underscore, ...) to combine properly with
-   colors. The workaround is to search your `~/.tmux.conf.local` copy and
+   colors. The workaround is to search your `.local` customization file copy and
    replace attributes with `'none'`.
 
    Also, until Window's console replaces its GDI based render with a DirectWrite
@@ -166,8 +166,8 @@ list of key bindings:
 
 This configuration uses the following bindings:
 
- - `<prefix> e` opens `~/.tmux.conf.local` with the editor defined by the
-   `$EDITOR` environment variable (defaults to `vim` when empty)
+ - `<prefix> e` opens the `.local` customization file copy with the editor
+   defined by the `$EDITOR` environment variable (defaults to `vim` when empty)
  - `<prefix> r` reloads the configuration
  - `C-l` clears both the screen and the tmux history
 
@@ -218,11 +218,11 @@ customize it further to your needs.
 ❗️ Again, you should never alter the main `.tmux.conf` or `tmux.conf` file.
 If you do, you're on your own.
 
-Please refer to the sample `.tmux.conf.local` file to know more about variables
-you can adjust to alter different behaviors. Upon successful installation,
-pressing `<prefix> e` will open your `.local` configuration file copy with the
-editor defined by the `$EDITOR` environment variable (defaults to `vim` when
-empty).
+Please refer to the sample `.local` customization file to know more about the
+variables that allow you to alter different behaviors. Upon successful
+installation, pressing `<prefix> e` will open your `.local` customization file
+copy with the editor defined by the `$EDITOR` environment variable (defaults to
+`vim` when empty).
 
 ### Enabling the Powerline look
 
@@ -245,8 +245,8 @@ To make use of these symbols, there are several options:
 [powerline font]: https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 [terminal support]: http://powerline.readthedocs.io/en/master/usage.html#usage-terminal-emulators
 
-Then edit your `~/.tmux.conf.local` copy (with `<prefix> e`) and adjust the
-following variables:
+Then edit your `.local` customization file copy (with `<prefix> e`) and adjust
+the following variables:
 
 ```
 tmux_conf_theme_left_separator_main='\uE0B0'
@@ -263,7 +263,7 @@ though.
 
 ### Configuring the status line
 
-Edit your `.local` configuration file copy (`<prefix> e`) and adjust the
+Edit your `.local` customization file copy (`<prefix> e`) and adjust the
 `tmux_conf_theme_status_left` and `tmux_conf_theme_status_right` variables to
 your own preferences.
 
@@ -306,7 +306,7 @@ minutes whatever the value of `status-interval`.
 [wttr.in]: https://github.com/chubin/wttr.in#one-line-output
 
 💡 You can also define your own custom variables by writing special functions,
-see the sample `.local` configuration file for instructions.
+see the sample `.local` customization file for instructions.
 
 Finally, remember `tmux_conf_theme_status_left` and
 `tmux_conf_theme_status_right` end up being given to tmux as `status-left` and
@@ -324,7 +324,7 @@ This configuration now comes with built-in [TPM] support:
 - whenever a plugin introduces a variable to be used in `status-left` or
   `status-right`, you can use it in `tmux_conf_theme_status_left` and
   `tmux_conf_theme_status_right` variables, see instructions above 👆
-- ⚠️ do not add `set -g @plugin 'tmux-plugins/tpm'`
+- ⚠️ do not add `set -g @plugin 'tmux-plugins/tpm'` to any configuration file
 - ⛔️ do not add `run '~/.tmux/plugins/tpm/tpm'` to any configuration file
 
 ⚠️ The TPM bindings differ slightly from upstream:
@@ -332,7 +332,7 @@ This configuration now comes with built-in [TPM] support:
   - uninstalling plugins: `<prefix> + Alt + u`
   - updating plugins: `<prefix> + u`
 
-See the sample `.local` configuration file for instructions.
+See the sample `.local` customization file for instructions.
 
 [TPM]: https://github.com/tmux-plugins/tpm
 
